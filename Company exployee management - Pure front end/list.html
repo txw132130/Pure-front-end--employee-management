@@ -1,0 +1,42 @@
+<div class="w3-container">
+	<h3>Users</h3>
+	 	<form >
+	        <div>
+	            <label >Search</label>
+	            <input type="text" ng-model="search"  placeholder="Search"></input>
+	        </div>
+	    </form>
+	<table class="w3-table w3-bordered w3-striped">
+	  <tr>
+	    <th>Edit</th>
+	    <th ng-click="sort('fName')">First Name</th>
+	    <th ng-click="sort('lName')">Last Name</th>
+	    <th ng-click="sort('Sex')">Sex</th>
+	    <th ng-click = "">Delete</th>
+	  </tr>
+	  <tr ng-repeat="user in users | orderBy:sortKey:reverse | filter:search|startFrom:currentPage*pageSize| limitTo: pageSize ">
+	    <td>
+	    <a href="#/route2">  <button class="w3-btn w3-ripple" ng-click="save(user)">&#9998; Edit</button></a>
+	    </td>
+	    <td>{{ user.fName }}</td>
+	    <td>{{ user.lName }}</td>
+	    <td>{{ user.Sex }}</td>
+	    <td>
+	      <button class="w3-btn w3-ripple" ng-click="remove(user.id)"> Delete</button>
+	    </td>
+	  </tr>
+	</table>
+	<ul class="pagination">
+	 	<li ng-click="Previous()" ng-class="{disabled:currentPage === 0}">
+	 		<a>Previous</a>
+	 	</li>
+	  	<li ng-repeat="num in pageNum" ng-click="setPage(num)" ng-class="{active:currentPage === num-1}">
+	  		<a>{{num}}</a>
+		</li>
+	  	<li   ng-click="Next()" ng-class="{disabled:currentPage === numberOfPages-1}">
+	  		<a>Next</a>
+	  	</li>
+	</ul> 
+	<br>
+	<a href="#/route1"><button class="w3-btn w3-green w3-ripple">  &#9998;Create New User</button></a>
+</div>
